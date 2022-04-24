@@ -1,4 +1,9 @@
 let kittens = []
+let submittedKitten = {}
+
+loadKittens()
+
+
 /**
  * Called when submitting the new Kitten Form
  * This method will pull data from the form
@@ -7,6 +12,21 @@ let kittens = []
  * Then reset the form
  */
 function addKitten(event) {
+  event.preventDefault()
+ 
+  let nameSubmit = event.target;
+  
+  let repeatedNameCheck = kittens.find(Cat => Cat.name == nameSubmit)
+
+  if(!repeatedNameCheck) {
+    submittedKitten = {name: nameSubmit , mood: "indifferent" , affection: 5 , kittenID: generateId() }
+    kittens.push(submittedKitten)
+    console.log(kittens);
+    saveKittens()
+  }
+  console.log(kittens);
+  
+  drawKittens()
 }
 
 /**
@@ -14,6 +34,7 @@ function addKitten(event) {
  * Saves the string to localstorage at the key kittens 
  */
 function saveKittens() {
+  window.localStorage.setItem("kitten", JSON.stringify(kittens))
 }
 
 /**
@@ -22,12 +43,45 @@ function saveKittens() {
  * the kittens array to the retrieved array
  */
 function loadKittens() {
+  
+  let kittenData = JSON.parse(window.localStorage.getItem("kitten"))
+kittens = kittenData
+drawKittens()
 }
 
 /**
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
+  console.log("test");
+  let kittenCardDraft = ``
+  for (let i = 0; i < kittens.length; i++) {
+   console.log("testing for loop");
+    let kitten = kittens[i] 
+    kittenCardDraft += `
+    <div class="kitten1 card">
+          <div>
+            KITTEN NAME: ${kitten.name}
+          </div>
+          <div>
+            <img src="moody-logo.png" alt="Moody Kittens">
+          </div>
+          <div>
+            MOOD: ${kitten.mood}
+          </div>
+          <div>
+            AFFECTION: ${kitten.affection}
+          </div>
+          <div>
+            <button>PET</button>
+            <button>CATNIP</button>
+          </div>
+
+        </div>
+    `
+    
+  }
+  document.getElementById(`kittens`).innerHTML =kittenCardDraft
 }
 
 
@@ -37,6 +91,7 @@ function drawKittens() {
  * @return {Kitten}
  */
 function findKittenById(id) {
+  let Kitten =kittens.find(k => k.kittenID == id)
 }
 
 
@@ -87,9 +142,9 @@ function getStarted() {
 // --------------------------------------------- No Changes below this line are needed
 
 /**
- * Defines the Properties of a Kitten
- * @typedef {{name: string, mood: string, affection: number}} Kitten
- */
+/  * Defines the Properties of a Kitten
+/  * @typedef {{name: string, mood: string, affection: number}} Kitten
+/  */
 
 
 /**
@@ -102,5 +157,3 @@ function generateId() {
 }
 
 loadKittens();
-© 2022 GitHub, Inc.
-Terms

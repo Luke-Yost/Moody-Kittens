@@ -121,12 +121,20 @@ button.btn-special:hover{
   padding: 1em;
   box-shadow: var(--shadow);
   border-radius: var(--corners);
+  /* adding in formatting to make this a sort of kitten card class to get the rough layout 
+  of how i want the card to look, and be able to start writing JS that is linked to it.
+   Might switch to a separate class later. */
+  height: 320px;
+  width: 250px;
 }
 
 .shadow{
   filter: drop-shadow(var(--shadow));
 }
 
+kitten-card{
+
+}
 
 .kitten img{
   filter: drop-shadow(2px 4px 6px #1b1b1b);
