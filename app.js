@@ -1,8 +1,6 @@
-let kittens = []
+let kittens = [];
 let submittedKitten = {}
-
-loadKittens()
-
+console.log(kittens.length);
 
 /**
  * Called when submitting the new Kitten Form
@@ -24,7 +22,7 @@ function addKitten(event) {
     console.log(kittens);
     saveKittens()
   }
-  console.log(kittens);
+
   
   drawKittens()
 }
@@ -45,8 +43,10 @@ function saveKittens() {
 function loadKittens() {
   
   let kittenData = JSON.parse(window.localStorage.getItem("kitten"))
-kittens = kittenData
-drawKittens()
+  console.log(kittenData);
+
+  if(!kittenData == null)
+  kittens = kittenData
 }
 
 /**
