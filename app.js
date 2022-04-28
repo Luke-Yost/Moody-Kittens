@@ -11,10 +11,12 @@ console.log(kittens.length);
  */
 function addKitten(event) {
   event.preventDefault()
+
+  let form =event.target 
  
-  let nameSubmit = event.target;
+  let nameSubmit = (form.KittenName.value) 
   
-  let repeatedNameCheck = kittens.find(Cat => Cat.name == nameSubmit)
+  let repeatedNameCheck = kittens.find(kitty => kitty.kittenName == nameSubmit)
 
   if(!repeatedNameCheck) {
     submittedKitten = {name: nameSubmit , mood: "indifferent" , affection: 5 , kittenID: generateId() }
