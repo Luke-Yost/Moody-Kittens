@@ -2,6 +2,9 @@ let kittens = [];
 let submittedKitten = {}
 console.log(kittens.length);
 
+loadKittens()
+// drawKittens()
+
 /**
  * Called when submitting the new Kitten Form
  * This method will pull data from the form
@@ -16,7 +19,7 @@ function addKitten(event) {
  
   let nameSubmit = (form.KittenName.value) 
   
-  let repeatedNameCheck = kittens.find(kitty => kitty.kittenName == nameSubmit)
+  let repeatedNameCheck = kittens.find(kitty => kitty.name == nameSubmit)
 
   if(!repeatedNameCheck) {
     submittedKitten = {name: nameSubmit , mood: "indifferent" , affection: 5 , kittenID: generateId() }
@@ -47,7 +50,7 @@ function loadKittens() {
   let kittenData = JSON.parse(window.localStorage.getItem("kitten"))
   console.log(kittenData);
 
-  if(!kittenData == null)
+  if(kittenData != null)
   kittens = kittenData
 }
 
