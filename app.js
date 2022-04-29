@@ -3,7 +3,7 @@ let submittedKitten = {}
 console.log(kittens.length);
 
 loadKittens()
-// drawKittens()
+drawKittens()
 
 /**
  * Called when submitting the new Kitten Form
@@ -48,7 +48,7 @@ function saveKittens() {
 function loadKittens() {
   
   let kittenData = JSON.parse(window.localStorage.getItem("kitten"))
-  console.log(kittenData);
+  // console.log(kittenData);
 
   if(kittenData != null)
   kittens = kittenData
@@ -78,8 +78,9 @@ function drawKittens() {
             AFFECTION: ${kitten.affection}
           </div>
           <div>
-            <button>PET</button>
-            <button>CATNIP</button>
+            <button class= ${kitten.kittenID}>PET</button>
+            <button class= ${kitten.kittenID}>CATNIP</button>
+            <button class= ${kitten.kittenID}>BATHE</button>
           </div>
 
         </div>
