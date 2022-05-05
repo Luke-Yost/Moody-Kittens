@@ -1,6 +1,8 @@
 let kittens = [];
 let submittedKitten = {}
-console.log(kittens.length);
+// console.log(kittens.length);
+
+let Kitten = ''
 
 loadKittens()
 drawKittens()
@@ -24,10 +26,11 @@ function addKitten(event) {
   if(!repeatedNameCheck) {
     submittedKitten = {name: nameSubmit , mood: "indifferent" , affection: 5 , kittenID: generateId() }
     kittens.push(submittedKitten)
-    console.log(kittens);
+    // console.log(kittens);
     saveKittens()
   }
 
+  form.reset()
   
   drawKittens()
 }
@@ -58,10 +61,10 @@ function loadKittens() {
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
-  console.log("test");
+  // console.log("test");
   let kittenCardDraft = ``
   for (let i = 0; i < kittens.length; i++) {
-   console.log("testing for loop");
+  //  console.log("testing for loop");
     let kitten = kittens[i] 
     kittenCardDraft += `
     <div class="kitten1 card">
@@ -78,12 +81,12 @@ function drawKittens() {
             AFFECTION: ${kitten.affection}
           </div>
           <div>
-            <button class= ${kitten.kittenID}>PET</button>
-            <button class= ${kitten.kittenID}>CATNIP</button>
-            <button class= ${kitten.kittenID}>BATHE</button>
+            <button class= ${kitten.kittenID} onclick= pet("${kitten.kittenID}") >PET</button>
+            <button class= ${kitten.kittenID} onclick=catnip("${kitten.kittenID}") >CATNIP</button>
+            <button class= ${kitten.kittenID} onclick=bathe("${kitten.kittenID}") >BATHE</button>
           </div>
 
-        </div>
+        </div>  
     `
     
   }
@@ -97,7 +100,10 @@ function drawKittens() {
  * @return {Kitten}
  */
 function findKittenById(id) {
-  let Kitten =kittens.find(k => k.kittenID == id)
+
+  Kitten = kittens.find(k => k.kittenID == id)
+  console.log(id);
+
 }
 
 
@@ -110,6 +116,20 @@ function findKittenById(id) {
  * @param {string} id 
  */
 function pet(id) {
+  console.log(id);
+  let RandomNumber = Math.random()
+  findKittenById(id)
+  console.log(Kitten);
+  if(RandomNumber>0.5 && Kitten.affection < 10){
+  Kitten.affection ++  
+  }
+else if(Kitten.affection>0){
+  Kitten.affection --
+  }
+  setKittenMood(id)
+  drawKittens()
+  saveKittens()
+
 }
 
 /**
@@ -119,13 +139,31 @@ function pet(id) {
  * @param {string} id
  */
 function catnip(id) {
+  findKittenById(id)
+  Kitten.mood = "indifferent"
+  Kitten.affection = 5
+  setKittenMood(id)
+  drawKittens()
+  saveKittens()
 }
 
 /**
  * Sets the kittens mood based on its affection
- * @param {Kitten} kitten 
+//  * @param {Kitten} kitten 
  */
-function setKittenMood(kitten) {
+function setKittenMood(id) {
+  if(Kitten.affection>=7){
+    Kitten.mood = "Excited ;)"
+  }
+  else if(Kitten.affection>=4 && Kitten.affection<7){
+    Kitten.mood = "indifferent"
+  }
+  else if(Kitten.affection<4 && Kitten.affection>0){
+    Kitten.mood = "pissy"
+  }
+  else{
+    Kitten.mood = "nonexistent"
+  }
 }
 
 /**
