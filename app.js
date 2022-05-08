@@ -61,6 +61,7 @@ function loadKittens() {
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
+  if(kittens != null){
   // console.log("test");
   let kittenCardDraft = ``
   for (let i = 0; i < kittens.length; i++) {
@@ -92,7 +93,7 @@ function drawKittens() {
   }
   document.getElementById(`kittens`).innerHTML =kittenCardDraft
 }
-
+}
 
 /**
  * Find the kitten in the array by its id
@@ -171,6 +172,11 @@ function setKittenMood(id) {
  * remember to save this change
  */
 function clearKittens(){
+  localStorage.clear()
+  kittens.splice(0, kittens.length)
+ saveKittens()
+ loadKittens()
+  drawKittens()
 }
 
 /**
