@@ -3,7 +3,7 @@ let submittedKitten = {}
 // console.log(kittens.length);
 
 let Kitten = ''
-
+let emoji = ""
 loadKittens()
 drawKittens()
 
@@ -24,7 +24,7 @@ function addKitten(event) {
   let repeatedNameCheck = kittens.find(kitty => kitty.name == nameSubmit)
 
   if(!repeatedNameCheck) {
-    submittedKitten = {name: nameSubmit , mood: "indifferent" , affection: 5 , kittenID: generateId() }
+    submittedKitten = {name: nameSubmit ,  mood: "INDIFFERENT :|" , affection: 5 , kittenID: generateId() }
     kittens.push(submittedKitten)
     // console.log(kittens);
     saveKittens()
@@ -61,22 +61,22 @@ function loadKittens() {
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
-  if(kittens != null){
+ 
   // console.log("test");
   let kittenCardDraft = ``
-  for (let i = 0; i < kittens.length; i++) {
+  for (let i = 1; i < kittens.length; i++) {
   //  console.log("testing for loop");
     let kitten = kittens[i] 
     kittenCardDraft += `
-    <div class="kitten1 card">
+    <div class="mb-2 mt-2 m-2 card">
           <div>
             KITTEN NAME: ${kitten.name}
           </div>
           <div>
-            <img src="moody-logo.png" alt="Moody Kittens">
+            <img class="kitten ${kitten.mood}" src="moody-logo.png" alt="Moody Kittens">
           </div>
-          <div>
-            MOOD: ${kitten.mood}
+          <div class=${kitten.mood}>
+            MOOD: ${kitten.mood}  ${emoji}
           </div>
           <div>
             AFFECTION: ${kitten.affection}
@@ -84,7 +84,7 @@ function drawKittens() {
           <div>
             <button class= ${kitten.kittenID} onclick= pet("${kitten.kittenID}") >PET</button>
             <button class= ${kitten.kittenID} onclick=catnip("${kitten.kittenID}") >CATNIP</button>
-            <button class= ${kitten.kittenID} onclick=bathe("${kitten.kittenID}") >BATHE</button>
+            <button class= btn-cancel ${kitten.kittenID} onclick=bathe("${kitten.kittenID}") >BATHE</button>
           </div>
 
         </div>  
@@ -93,7 +93,7 @@ function drawKittens() {
   }
   document.getElementById(`kittens`).innerHTML =kittenCardDraft
 }
-}
+
 
 /**
  * Find the kitten in the array by its id
@@ -141,11 +141,22 @@ else if(Kitten.affection>0){
  */
 function catnip(id) {
   findKittenById(id)
-  Kitten.mood = "indifferent"
+  Kitten.mood = "INDIFFERENT"
   Kitten.affection = 5
   setKittenMood(id)
   drawKittens()
   saveKittens()
+} 
+
+function bathe(id){
+  findKittenById(id)
+  let batheKitten = kittens.filter((kitty) => kitty.kittenID !== id)
+  console.log(batheKitten);
+  kittens= batheKitten
+  saveKittens()
+  loadKittens()
+  drawKittens()
+  // console.log(kittens);
 }
 
 /**
@@ -153,17 +164,28 @@ function catnip(id) {
 //  * @param {Kitten} kitten 
  */
 function setKittenMood(id) {
+findKittenById(id)
+
   if(Kitten.affection>=7){
-    Kitten.mood = "Excited ;)"
+    Kitten.mood = "EXITED"
+    emoji = ":)"
   }
   else if(Kitten.affection>=4 && Kitten.affection<7){
-    Kitten.mood = "indifferent"
+    Kitten.mood = "INDIFFERENT"
+    emoji = ":|"
   }
   else if(Kitten.affection<4 && Kitten.affection>0){
-    Kitten.mood = "pissy"
+    Kitten.mood = "PISSY"
+    emoji = ":("
   }
   else{
     Kitten.mood = "nonexistent"
+    findKittenById(id)
+    let batheKitten = kittens.filter((kitty) => kitty.kittenID !== id)
+    console.log(batheKitten);
+    kittens= batheKitten
+    saveKittens()
+    drawKittens()
   }
 }
 
@@ -173,10 +195,11 @@ function setKittenMood(id) {
  */
 function clearKittens(){
   localStorage.clear()
-  kittens.splice(0, kittens.length)
- saveKittens()
- loadKittens()
-  drawKittens()
+  kittens = []
+  console.log(kittens);
+//  saveKittens()
+//  loadKittens()
+  // drawKittens()
 }
 
 /**

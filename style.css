@@ -15,6 +15,9 @@
   --danger: #ff3737;
 }
 
+
+
+
 body{
   background-color: var(--bg);
   font-size: 16pt;
@@ -132,30 +135,32 @@ button.btn-special:hover{
   filter: drop-shadow(var(--shadow));
 }
 
-kitten-card{
-
+.EXITED{
+  background-color:rgba(160, 238, 215, 0.404)
 }
 
-.kitten img{
+.INDIFFERENT{
+  background-color: #64646462;
+}
+
+.PISSY{
+  background-color:#ff000052 ;
+}
+
+.kitten {
   filter: drop-shadow(2px 4px 6px #1b1b1b);
   transition: all .35s ease;
 }
-.kitten.happy img{
+.kitten.EXITED  {
   filter: drop-shadow(2px 4px 6px #00ffb3);
 }
-.kitten.tolerant img{
+.kitten.INDIFFERENT {
   filter: drop-shadow(2px 4px 6px #646464);
 }
-.kitten.angry img{
+.kitten.PISSY {
   filter: drop-shadow(2px 4px 6px #ff0000) contrast(1);
 }
-.kitten.gone img{
-  filter: drop-shadow(2px 4px 6px #ff0000) contrast(0);
-}
-.kitten.gone{
-  color: var(--danger);
-  pointer-events: none;
-}
+
 
 .bg-dark{
   background-color: var(--dark);
