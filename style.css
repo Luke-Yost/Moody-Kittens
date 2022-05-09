@@ -1,4 +1,5 @@
 *{
+  font-family:'Roboto+condensed', italic;
   box-sizing: border-box;
 }
 :root{
@@ -124,6 +125,7 @@ button.btn-special:hover{
   padding: 1em;
   box-shadow: var(--shadow);
   border-radius: var(--corners);
+  
   /* adding in formatting to make this a sort of kitten card class to get the rough layout 
   of how i want the card to look, and be able to start writing JS that is linked to it.
    Might switch to a separate class later. */
